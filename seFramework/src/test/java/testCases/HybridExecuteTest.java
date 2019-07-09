@@ -22,9 +22,15 @@ public class HybridExecuteTest {
 	
 	
   @Test(dataProvider = "hybridData")
-  public void f(String testcaseName,String keyword,String objectName,String objectType,String value) throws Exception
+  public void loginTest(String executeTest,String testcaseName,String keyword,String objectName,String objectType,String value) throws Exception
   {
-	  if(testcaseName!=null && testcaseName.length()!=0)
+	  
+//	  if(executeTest.equalsIgnoreCase("No"))
+//	  {
+//		  System.out.println("Not executing this");
+//	  }	 
+	  
+	  if(executeTest.equalsIgnoreCase("Yes") && testcaseName!=null && testcaseName.length()!=0)
 	  {
 		  System.setProperty("webdriver.chrome.driver","P:\\browsers\\chromedriver.exe");
 		  webdriver = new ChromeDriver();	
@@ -67,10 +73,14 @@ public class HybridExecuteTest {
   }
   @BeforeTest
   public void beforeTest() {
+	  
+	  System.out.println("The test has started");
   }
 
   @AfterTest
   public void afterTest() {
+	  
+	  webdriver.close();
   }
 
 }
