@@ -18,13 +18,11 @@ import operation.UIOperation;
 
 public class HybridExecuteTest {
 	
-	WebDriver webdriver=null;
-	
+	WebDriver webdriver=null;	
 	
   @Test(dataProvider = "hybridData")
   public void loginTest(String executeTest,String testcaseName,String keyword,String objectName,String objectType,String value) throws Exception
   {
-
 	  if(executeTest.equalsIgnoreCase("Yes") && testcaseName!=null && testcaseName.length()!=0)
 	  {
 		  System.setProperty("webdriver.chrome.driver","P:\\browsers\\chromedriver.exe");
@@ -35,11 +33,10 @@ public class HybridExecuteTest {
 		  UIOperation operation = new UIOperation(webdriver);
 		  //Call perform function to perform operation on UI
 		              operation.perform(allObjects, keyword, objectName,
-		                  objectType, value);       
-		  
+		                  objectType, value);	  
+				  
 	  }
-	  
-	 
+	 	 
   }
   
   @DataProvider(name="hybridData")
@@ -55,15 +52,18 @@ public class HybridExecuteTest {
   int colCount=firstRow.getPhysicalNumberOfCells();
   //object = new Object[rowCount][5];
   object = new Object[rowCount][colCount];
-  for (int i = 0; i < rowCount; i++) {
+  for (int i = 0; i < rowCount; i++) 
+  {
       //Loop over all the rows
       XSSFRow row = wSheet.getRow(i+1);
       //Create a loop to print cell values in a row
-      for (int j = 0; j < row.getLastCellNum(); j++) {
+      for (int j = 0; j < row.getLastCellNum(); j++) 
+      {
           //Print excel data in console
           object[i][j] = row.getCell(j).toString();
       }
   }
+  
   System.out.println("");
    return object;    
   }
@@ -77,9 +77,6 @@ public class HybridExecuteTest {
   public void afterTest() {
 	  
 	  webdriver.close();
-  }
-  
-  
-  
+  }  
 
 }
