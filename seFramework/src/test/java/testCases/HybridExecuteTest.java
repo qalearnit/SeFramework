@@ -24,28 +24,24 @@ public class HybridExecuteTest {
   @Test(dataProvider = "hybridData")
   public void loginTest(String executeTest,String testcaseName,String keyword,String objectName,String objectType,String value) throws Exception
   {
-	  
-//	  if(executeTest.equalsIgnoreCase("No"))
-//	  {
-//		  System.out.println("Not executing this");
-//	  }	 
-	  
+
 	  if(executeTest.equalsIgnoreCase("Yes") && testcaseName!=null && testcaseName.length()!=0)
 	  {
 		  System.setProperty("webdriver.chrome.driver","P:\\browsers\\chromedriver.exe");
 		  webdriver = new ChromeDriver();	
+		  
+		  ReadObject object = new ReadObject();
+		  Properties allObjects = object.getObjectRepository();
+		  UIOperation operation = new UIOperation(webdriver);
+		  //Call perform function to perform operation on UI
+		              operation.perform(allObjects, keyword, objectName,
+		                  objectType, value);       
+		  
 	  }
 	  
-	  ReadObject object = new ReadObject();
-	  Properties allObjects = object.getObjectRepository();
-	  UIOperation operation = new UIOperation(webdriver);
-	      //Call perform function to perform operation on UI
-	              operation.perform(allObjects, keyword, objectName,
-	                  objectType, value);
+	 
   }
   
-  
-
   @DataProvider(name="hybridData")
   public Object[][] getDataFromDataprovider() throws IOException{
   Object[][] object = null;
@@ -82,5 +78,8 @@ public class HybridExecuteTest {
 	  
 	  webdriver.close();
   }
+  
+  
+  
 
 }
